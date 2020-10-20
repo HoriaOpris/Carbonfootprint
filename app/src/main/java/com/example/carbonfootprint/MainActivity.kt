@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
         val fab: FloatingActionButton = findViewById(R.id.fab)
-        var myInt:Int = 1;
+        var myInt: Int = 1;
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                     R.array.planets_array,
                     android.R.layout.simple_spinner_item
             ).also { adapter ->
-                // Specify the layout to use when the list of choices appears
+                // Specify the layout to use when the list of choices appears+
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 // Apply the adapter to the spinner
                 spinner.adapter = adapter
@@ -52,9 +52,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemSelected(parent: AdapterView<*>,
                                             view: View, position: Int, id: Long) {
                     val textView: TextView = findViewById<TextView>(R.id.editTextTextPersonName)
+                    val out: TextView = findViewById<TextView>(R.id.outputCarbon)
 
                     myInt++;
                     textView.setText(myInt.toString())
+                    out.setText((10).toString() + " kilograms of CO2")
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
