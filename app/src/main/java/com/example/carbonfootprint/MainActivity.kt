@@ -15,56 +15,48 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import com.example.carbonfootprint.ui.main.SectionsPagerAdapter
+import kotlinx.android.synthetic.main.fragment_main.*
 
+class CarbonOut() {
+    var myInt: Int = 1;
+
+    fun run(): Int {
+        myInt++;
+
+        return myInt
+    }
+}
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
-        val viewPager: ViewPager = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
-        tabs.setupWithViewPager(viewPager)
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        var myInt: Int = 1;
+        setContentView(R.layout.fragment_main)
+        val horia = CarbonOut()
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        ArrayAdapter.createFromResource(
+                this,
+                R.array.planets_array,
+                android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
+        }
 
-            val spinner: Spinner = findViewById(R.id.spinner)
-// Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter.createFromResource(
-                    this,
-                    R.array.planets_array,
-                    android.R.layout.simple_spinner_item
-            ).also { adapter ->
-                // Specify the layout to use when the list of choices appears+
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                // Apply the adapter to the spinner
-                spinner.adapter = adapter
+        spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long) {
+                outputCarbon.setText(horia.run().toString())
             }
 
-            spinner.onItemSelectedListener = object :
-                    AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>,
-                                            view: View, position: Int, id: Long) {
-                    val textView: TextView = findViewById<TextView>(R.id.editTextTextPersonName)
-                    val out: TextView = findViewById<TextView>(R.id.outputCarbon)
-
-                    myInt++;
-                    textView.setText(myInt.toString())
-                    out.setText((10).toString() + " kilograms of CO2")
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    // write code to perform some action
-                }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
             }
-
         }
     }
 }
+
 
