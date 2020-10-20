@@ -1,38 +1,22 @@
 package com.example.carbonfootprint
 
-import android.app.Activity
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
-import com.example.carbonfootprint.ui.main.SectionsPagerAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class CarbonOut() {
-    var myInt: Int = 1;
-
-    fun run(): Int {
-        myInt++;
-
-        return myInt
+class CarbonOut(val miles: Int) {
+    fun run(): String {
+        return miles.toString()
     }
 }
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_main)
-        val horia = CarbonOut()
 
         ArrayAdapter.createFromResource(
                 this,
@@ -49,7 +33,16 @@ class MainActivity : AppCompatActivity() {
                 AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>,
                                         view: View, position: Int, id: Long) {
-                outputCarbon.setText(horia.run().toString())
+                var miles = inputMiles.text.toString()
+
+                if (miles.isNullOrEmpty()) {
+                    val carbon = CarbonOut(500)
+                    outputCarbon.setText(carbon.run())
+                } else {
+                    val carbon = CarbonOut(miles.toInt())
+                    outputCarbon.setText(carbon.run())
+                }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
