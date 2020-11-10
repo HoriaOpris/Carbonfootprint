@@ -1,10 +1,11 @@
 package com.example.carbonfootprint
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.compound.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class CarbonOut(val miles: Int) {
@@ -19,9 +20,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.fragment_main)
 
         ArrayAdapter.createFromResource(
-                this,
-                R.array.planets_array,
-                android.R.layout.simple_spinner_item
+            this,
+            R.array.planets_array,
+            android.R.layout.simple_spinner_item
         ).also { adapter ->
             // Specify the layout to use when the list of choices appears+
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -30,9 +31,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         spinner.onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>,
-                                        view: View, position: Int, id: Long) {
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
                 var miles = inputMiles.text.toString()
 
                 if (miles.isNullOrEmpty()) {
@@ -47,6 +50,25 @@ class MainActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {
                 // write code to perform some action
+            }
+        }
+
+        button_compound.setOnClickListener()
+        {
+            setContentView(R.layout.compound)
+
+            comp_calculate.setOnClickListener()
+            {
+                var initBalance = comp_initial_balance.text.toString()
+                var years = comp_years.text.toString()
+
+                if (!initBalance.isNullOrEmpty() && !years.isNullOrEmpty()) {
+                    var initBalance = initBalance.toInt()
+                    var years = years.toInt()
+                    var finalBalance = initBalance * years
+
+                    comp_final_balance.setText(finalBalance.toString())
+                }
             }
         }
     }
