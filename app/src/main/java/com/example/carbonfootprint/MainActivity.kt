@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.compound.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlin.math.pow
 
 class CarbonOut(val miles: Int) {
     fun run(): String {
@@ -61,13 +62,19 @@ class MainActivity : AppCompatActivity() {
             {
                 var initBalance = comp_initial_balance.text.toString()
                 var years = comp_years.text.toString()
+                var percent = comp_percent.text.toString()
+                var monthly = comp_monthly.text.toString()
 
-                if (!initBalance.isNullOrEmpty() && !years.isNullOrEmpty()) {
-                    var initBalance = initBalance.toInt()
-                    var years = years.toInt()
-                    var finalBalance = initBalance * years
+                if (!initBalance.isNullOrEmpty() && !years.isNullOrEmpty()
+                    && !percent.isNullOrEmpty() && monthly.isNullOrEmpty()
+                ) {
+                    var initBalance = initBalance.toDouble()
+                    var years = years.toDouble()
+                    var percent = percent.toDouble()
+                    var monthly = monthly.toDouble()
+                    var finalBalance = initBalance * (1 + (percent / 100)).pow(years)
 
-                    comp_final_balance.setText(finalBalance.toString())
+                    comp_final_balance.setText(finalBalance.toFloat().toString())
                 }
             }
         }
