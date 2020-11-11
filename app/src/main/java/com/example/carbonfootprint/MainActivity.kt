@@ -65,17 +65,22 @@ class MainActivity : AppCompatActivity() {
                 var percent = comp_percent.text.toString()
                 var monthly = comp_monthly.text.toString()
 
-                if (!initBalance.isNullOrEmpty() && !years.isNullOrEmpty()
-                    && !percent.isNullOrEmpty() && monthly.isNullOrEmpty()
-                ) {
-                    var initBalance = initBalance.toDouble()
-                    var years = years.toDouble()
-                    var percent = percent.toDouble()
-                    var monthly = monthly.toDouble()
-                    var finalBalance = initBalance * (1 + (percent / 100)).pow(years)
+                if (initBalance.isNullOrEmpty())
+                    initBalance = 0.toString()
 
-                    comp_final_balance.setText(finalBalance.toFloat().toString())
-                }
+                if(years.isNullOrEmpty())
+                    years = 0.toString()
+
+                if(percent.isNullOrEmpty())
+                    percent = 0.toString()
+
+                if(monthly.isNullOrEmpty())
+                    monthly = 0.toString()
+
+                var finalBalance =
+                    initBalance.toDouble() * (1 + (percent.toDouble() / 100)).pow(years.toDouble())
+
+                comp_final_balance.setText(finalBalance.toFloat().toString())
             }
         }
     }

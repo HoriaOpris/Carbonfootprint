@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="120"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -17,7 +17,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -27,7 +27,7 @@
 
     <EditText
         android:id="@+id/comp_final_balance"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="5dp"
@@ -72,7 +72,7 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="120"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -82,7 +82,7 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="120"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -103,7 +103,7 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="120"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
