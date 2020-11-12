@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun treatNullString(s: String): String {
-            return if(s.isNullOrEmpty())
+            return if (s.isNullOrEmpty())
                 0.toString()
             else
                 s
@@ -66,18 +66,11 @@ class MainActivity : AppCompatActivity() {
 
             comp_calculate.setOnClickListener()
             {
-                var initBalance = comp_initial_balance.text.toString()
-                var years = comp_years.text.toString()
-                var percent = comp_percent.text.toString()
-                var monthly = comp_monthly.text.toString()
-
-                initBalance = treatNullString(initBalance)
-                years = treatNullString(years)
-                percent = treatNullString(percent)
-                monthly = treatNullString(monthly)
-
-                var finalBalance: Double
-                finalBalance = initBalance.toDouble()
+                var initBalance = treatNullString(comp_initial_balance.text.toString())
+                var years = treatNullString(comp_years.text.toString())
+                var percent = treatNullString(comp_percent.text.toString())
+                var monthly = treatNullString(comp_monthly.text.toString())
+                var finalBalance = initBalance.toDouble()
 
                 for (i in 0 until years.toInt()) {
                     finalBalance += ((percent.toDouble() / 100.0) * finalBalance)
