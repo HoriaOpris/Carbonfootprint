@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun treatNullString(s: String): String {
-            return if (s.isNullOrEmpty()) 0.toString() else s
+        fun treatNullString(s: String): Double {
+            return if (s.isNullOrEmpty()) 0.0 else s.toDouble()
         }
 
         button_compound.setOnClickListener()
@@ -65,19 +65,20 @@ class MainActivity : AppCompatActivity() {
 
             comp_calculate.setOnClickListener()
             {
-                var initBalance = treatNullString(comp_initial_balance.text.toString())
+                var balance = treatNullString(comp_initial_balance.text.toString())
                 var years = treatNullString(comp_years.text.toString())
                 var percent = treatNullString(comp_percent.text.toString())
                 var monthly = treatNullString(comp_monthly.text.toString())
-                var finalBalance = initBalance.toDouble()
 
                 for (i in 0 until years.toInt()) {
-                    finalBalance += ((percent.toDouble() / 100.0) * finalBalance)
-                    finalBalance += monthly.toDouble() * 12.0
+                    balance += ((percent / 100.0) * balance)
+                    balance += monthly * 12.0
                 }
 
-                comp_final_balance.setText(NumberFormat.getNumberInstance(Locale.US).
-                format(finalBalance.toInt()).toString() + " $")
+                comp_final_balance.setText(
+                    NumberFormat.getNumberInstance(Locale.US).format(balance.toInt())
+                        .toString() + " $"
+                )
             }
         }
     }
