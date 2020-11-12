@@ -70,10 +70,8 @@ class MainActivity : AppCompatActivity() {
                 var percent = treatNullString(comp_percent.text.toString())
                 var monthly = treatNullString(comp_monthly.text.toString())
 
-                for (i in 0 until years.toInt()) {
-                    balance += ((percent / 100.0) * balance)
-                    balance += monthly * 12.0
-                }
+                for (i in 0 until years.toInt())
+                    balance += ((percent / 100.0) * balance) + (monthly * 12.0)
 
                 comp_final_balance.setText(
                     NumberFormat.getNumberInstance(Locale.US).format(balance.toInt())
