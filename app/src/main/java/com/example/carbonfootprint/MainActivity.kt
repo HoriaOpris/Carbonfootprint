@@ -7,6 +7,8 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.compound.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.text.NumberFormat
+import java.util.*
 
 class CarbonOut(val miles: Int) {
     fun run(): String {
@@ -54,10 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun treatNullString(s: String): String {
-            return if (s.isNullOrEmpty())
-                0.toString()
-            else
-                s
+            return if (s.isNullOrEmpty()) 0.toString() else s
         }
 
         button_compound.setOnClickListener()
@@ -77,7 +76,8 @@ class MainActivity : AppCompatActivity() {
                     finalBalance += monthly.toDouble() * 12.0
                 }
 
-                comp_final_balance.setText(finalBalance.toInt().toString() + " $")
+                comp_final_balance.setText(NumberFormat.getNumberInstance(Locale.US).
+                format(finalBalance.toInt()).toString() + " $")
             }
         }
     }
