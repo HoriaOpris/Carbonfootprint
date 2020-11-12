@@ -53,6 +53,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        fun treatNullString(s: String): String {
+            return if(s.isNullOrEmpty())
+                0.toString()
+            else
+                s
+        }
+
         button_compound.setOnClickListener()
         {
             setContentView(R.layout.compound)
@@ -64,17 +71,10 @@ class MainActivity : AppCompatActivity() {
                 var percent = comp_percent.text.toString()
                 var monthly = comp_monthly.text.toString()
 
-                if (initBalance.isNullOrEmpty())
-                    initBalance = 0.toString()
-
-                if (years.isNullOrEmpty())
-                    years = 0.toString()
-
-                if (percent.isNullOrEmpty())
-                    percent = 0.toString()
-
-                if (monthly.isNullOrEmpty())
-                    monthly = 0.toString()
+                initBalance = treatNullString(initBalance)
+                years = treatNullString(years)
+                percent = treatNullString(percent)
+                monthly = treatNullString(monthly)
 
                 var finalBalance: Double
                 finalBalance = initBalance.toDouble()
