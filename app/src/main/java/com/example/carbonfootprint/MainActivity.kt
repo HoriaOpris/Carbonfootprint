@@ -16,24 +16,6 @@ class CarbonOut(val miles: Int) {
     }
 }
 
-class Compound(val Balance: String, val Years: String, val Percent: String, val Monthy: String) {
-    private fun treatNullString(s: String): Double {
-        return if (s.isNullOrEmpty()) 0.0 else s.toDouble()
-    }
-
-    fun gen(): Int {
-        var balance = treatNullString(Balance)
-        var years = treatNullString(Years)
-        var percent = treatNullString(Percent)
-        var monthly = treatNullString(Monthy)
-
-        for (i in 0 until years.toInt())
-            balance += ((percent / 100.0) * balance) + (monthly * 12.0)
-
-        return balance.toInt()
-    }
-}
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 var miles = inputMiles.text.toString()
 
-                if (miles.isNullOrEmpty()) {
+                if (miles.isEmpty()) {
                     val carbon = CarbonOut(500)
                     outputCarbon.setText(carbon.run())
                 } else {
