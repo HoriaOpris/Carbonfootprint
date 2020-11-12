@@ -16,6 +16,24 @@ class CarbonOut(val miles: Int) {
     }
 }
 
+class Compound(val Balance: String, val Years: String, val Percent: String, val Monthy: String) {
+    private fun treatNullString(s: String): Double {
+        return if (s.isNullOrEmpty()) 0.0 else s.toDouble()
+    }
+
+    fun gen(): Int {
+        var balance = treatNullString(Balance)
+        var years = treatNullString(Years)
+        var percent = treatNullString(Percent)
+        var monthly = treatNullString(Monthy)
+
+        for (i in 0 until years.toInt())
+            balance += ((percent / 100.0) * balance) + (monthly * 12.0)
+
+        return balance.toInt()
+    }
+}
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,26 +73,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun treatNullString(s: String): Double {
-            return if (s.isNullOrEmpty()) 0.0 else s.toDouble()
-        }
-
         button_compound.setOnClickListener()
         {
             setContentView(R.layout.compound)
 
             comp_calculate.setOnClickListener()
             {
-                var balance = treatNullString(comp_initial_balance.text.toString())
-                var years = treatNullString(comp_years.text.toString())
-                var percent = treatNullString(comp_percent.text.toString())
-                var monthly = treatNullString(comp_monthly.text.toString())
-
-                for (i in 0 until years.toInt())
-                    balance += ((percent / 100.0) * balance) + (monthly * 12.0)
+                val c = Compound(
+                    comp_initial_balance.text.toString(),
+                    comp_years.text.toString(),
+                    comp_percent.text.toString(),
+                    comp_monthly.text.toString()
+                )
 
                 comp_final_balance.setText(
-                    NumberFormat.getNumberInstance(Locale.US).format(balance.toInt())
+                    NumberFormat.getNumberInstance(Locale.US).format(c.gen())
                         .toString() + " $"
                 )
             }
