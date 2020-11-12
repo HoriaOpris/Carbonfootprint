@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                     comp_monthly.text.toString()
                 )
 
-                comp_final_balance.setText(c.CalcBalance())
+                comp_final_balance.setText(c.calcBalance())
             }
         }
     }

@@ -13,7 +13,7 @@ class Compound(
         return if (s.isEmpty()) 0.0 else s.toDouble()
     }
 
-    fun CalcBalance(): String {
+    fun calcBalance(): String {
         var balance = treatNullString(Balance)
         var years = treatNullString(Years)
         var percent = treatNullString(Percent)
