@@ -1,5 +1,8 @@
 package com.example.carbonfootprint
 
+import java.text.NumberFormat
+import java.util.*
+
 class Compound(
     private val Balance: String,
     private val Years: String,
@@ -10,7 +13,7 @@ class Compound(
         return if (s.isEmpty()) 0.0 else s.toDouble()
     }
 
-    fun gen(): Int {
+    fun CalcBalance(): String {
         var balance = treatNullString(Balance)
         var years = treatNullString(Years)
         var percent = treatNullString(Percent)
@@ -19,6 +22,6 @@ class Compound(
         for (i in 0 until years.toInt())
             balance += ((percent / 100.0) * balance) + (monthly * 12.0)
 
-        return balance.toInt()
+        return NumberFormat.getNumberInstance(Locale.US).format(balance.toInt()).toString() + " $"
     }
 }

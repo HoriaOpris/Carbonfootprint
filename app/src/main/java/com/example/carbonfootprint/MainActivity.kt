@@ -7,8 +7,6 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.compound.*
 import kotlinx.android.synthetic.main.fragment_main.*
-import java.text.NumberFormat
-import java.util.*
 
 class CarbonOut(val miles: Int) {
     fun run(): String {
@@ -68,10 +66,7 @@ class MainActivity : AppCompatActivity() {
                     comp_monthly.text.toString()
                 )
 
-                comp_final_balance.setText(
-                    NumberFormat.getNumberInstance(Locale.US).format(c.gen())
-                        .toString() + " $"
-                )
+                comp_final_balance.setText(c.CalcBalance())
             }
         }
     }
