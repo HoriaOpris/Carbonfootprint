@@ -2,6 +2,7 @@ package com.example.carbonfootprint
 
 import java.text.NumberFormat
 import java.util.*
+import kotlin.math.pow
 
 class Mortgage(
     private val Interest: String,
@@ -16,8 +17,10 @@ class Mortgage(
         var interest = treatNullString(Interest)
         var loan = treatNullString(Loan)
         var years = treatNullString(Years)
-        var total  = loan / years
+        var monthly = (loan * ((interest / 100) / 12)) *
+                (((1 + ((interest / 100) / 12)).pow(years * 12) /
+                        (((1 + ((interest / 100) / 12)).pow(years * 12)) - 1)))
 
-        return NumberFormat.getNumberInstance(Locale.US).format(total).toString() + " $"
+        return NumberFormat.getNumberInstance(Locale.US).format(monthly.toInt()).toString() + " $"
     }
 }
