@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.compound.*
 import kotlinx.android.synthetic.main.fragment_main.*
 
-class CarbonOut(val miles: Int) {
+class CarbonOut(private val miles: Int) {
     fun run(): String {
         return miles.toString()
     }
@@ -68,6 +68,13 @@ class MainActivity : AppCompatActivity() {
 
                 comp_final_balance.setText(c.calcBalance())
             }
+        }
+
+        button_mortgage.setOnClickListener()
+        {
+            setContentView(R.layout.mortgage)
+
+
         }
     }
 }
