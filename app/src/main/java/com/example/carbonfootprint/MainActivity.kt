@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.compound.*
 import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.mortgage.*
 
 class CarbonOut(private val miles: Int) {
     fun run(): String {
@@ -74,7 +75,16 @@ class MainActivity : AppCompatActivity() {
         {
             setContentView(R.layout.mortgage)
 
+            button_mortgage_calc.setOnClickListener()
+            {
+                val m = Mortgage(
+                    mortgage_interest.text.toString(),
+                    mortgage_loan.text.toString(),
+                    mortgage_years.text.toString()
+                )
 
+                mortgage_monthly.setText(m.calcMortgage())
+            }
         }
     }
 }
