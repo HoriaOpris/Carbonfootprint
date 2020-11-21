@@ -1,13 +1,17 @@
 package com.example.carbonfootprint
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.compound.*
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.mortgage.*
+
 
 class CarbonOut(private val miles: Int) {
     fun run(): String {
@@ -37,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 parent: AdapterView<*>,
                 view: View, position: Int, id: Long
             ) {
-                var miles = inputMiles.text.toString()
+                val miles = inputMiles.text.toString()
 
                 if (miles.isEmpty()) {
                     val carbon = CarbonOut(500)
@@ -53,6 +57,8 @@ class MainActivity : AppCompatActivity() {
                 // write code to perform some action
             }
         }
+
+
 
         button_compound.setOnClickListener()
         {
@@ -85,6 +91,17 @@ class MainActivity : AppCompatActivity() {
 
                 mortgage_monthly.setText(m.calcMortgage())
             }
+        }
+    }
+
+    private var backPressCnt = 0
+
+    override fun onBackPressed() {
+        if (backPressCnt >= 1) {
+            super.onBackPressed()
+        } else {
+            setContentView(R.layout.fragment_main)
+            backPressCnt++
         }
     }
 }
